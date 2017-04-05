@@ -9,8 +9,8 @@ function start(response, postData) {
             '<meta http-equiv="Content-Type" content="text/html; ' + 'charset=UTF =8" />' +
             '</head>' +
             '<body>' +
-            '<form action="/upload" method="post">' +
-            '<textarea name="test" rows="20" cols="60"></textarea>' +
+            '<form action="/upload"' + 'enctype="multipart/form-data" '+ 'method="post">'
+            '<input type="file" name="upload" />' +
             '<input type="sunmit" value="Submit Text" />' +
             '</form>' +
             '</body>' +
