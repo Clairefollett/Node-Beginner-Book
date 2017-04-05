@@ -1,6 +1,6 @@
-const querystring = require('querystring');
 const fs = require('fs');
 const formidable = require('formidable');
+const path = require('path');
 
 function start(response) {
     console.log('request handler start was called');
@@ -30,13 +30,8 @@ function upload(response, request) {
     form.parse(request, function(error, fields, files) {
         console.log('parsing completed')
 
-        fs.rename(files.upload.path, '/tmp/test.png', function(error) {
-            if(error) {
-                fs.unlink('/tmp/test.png');
-                fs.rename(files.upload.path, '/tmp/test.png');
-            }
-        });
-        response.writeHead(200, {'Content-Type': 'text/plain'});
+        fs.renameSync(files.upload.path, '/tmp/test.png');
+        response.writeHead(200, {'Content-Type': 'text/html'});
         response.write('image received: <br/>');
         response.write("<img src='/show ' />");
         response.end();
