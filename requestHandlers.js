@@ -30,7 +30,11 @@ function upload(response, request) {
     form.parse(request, function(error, fields, files) {
         console.log('parsing completed')
 
-        fs.renameSync(files.upload.path, '/tmp/test.png');
+        fs.rename(fields.upload + '', './tmp/breezy.png', function(error) {
+            if(error) {
+                console.log(error)
+            } 
+        });
         response.writeHead(200, {'Content-Type': 'text/html'});
         response.write('image received: <br/>');
         response.write("<img src='/show ' />");
@@ -41,7 +45,7 @@ function upload(response, request) {
 function show (response) {
     console.log('request handler show was called');
     response.writeHead(200, {'Content-Type': 'image/png'});
-    fs.createReadStream('/tmp/test.png').pipe(response);
+    fs.createReadStream('./tmp/breezy.png').pipe(response);
 }
 
 exports.start = start;
